@@ -7,6 +7,8 @@ module.exports = {
     merge,
     assert,
     isEqualJson,
+    logProperties,
+    isArray,
 }
 
 // TODO: Validate arguments of framework
@@ -14,6 +16,10 @@ module.exports = {
 let indent = 0;
 
 let context = {};
+
+function isArray(a) {
+    return Array.isArray(a);
+}
 
 function processExit() {
     console.log('Calling process.exit(1)');
@@ -64,16 +70,34 @@ function truncateStringTo(string, maxCharacters) {
     return string;
 }
 
+/**
+ * Does something special if the property name is "parent".
+ */
 function logProperties(object) {
-    let log = true;
-    if (log) console.log('logProperties entered');
+    let parent = 'parent';
+
+    let log = false;
+    if (log) console.log('logProperties entered', {object});
+
+    let prefix = getPrefix();
+
+    if (object.hasOwnProperty(parent)) {
+        logProperties(object.parent);
+        console.log(prefix + '--parent');
+    }
 
     const maxCharacters = 120;
-    let prefix = getPrefix();
     for (let property in object) {
+        if (property === parent) {
+            continue;
+        }
+
         let o = {};
-        o[property] = context[property];
+        o[property] = object[property];
+
         let json = JSON.stringify(o);
+        if (log) console.log('logProperties', {json});
+
         let trimmed = truncateStringTo(json, maxCharacters);
         console.log(prefix + trimmed);
     }    

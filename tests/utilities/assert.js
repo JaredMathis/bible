@@ -31,5 +31,3 @@ assert(false, () => console.log(exitMessage));
 console.log = oldConsoleLog;
 
 assert(logs.includes(exitMessage));
-
-//assert()

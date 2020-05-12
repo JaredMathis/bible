@@ -3,18 +3,15 @@ const {
     logIndent,
     merge,
     consoleLog,
+    logProperties,
 } = require('../utilities');
 
 logIndent(__filename, context => {
     merge(context, {step: 'reading'});
-    let text = readFile('data/el_greek.json');
+    let text = require('./../data/el_greek');
 
     merge(context, {step: 'parsing'});
     merge(context, {text});
-    text = "{\"abbrev\": \"gn\", \"chapters\": [[\"Εν\"]]}";
-    let json = JSON.parse(text);
-    consoleLog({a:1});
+    let parsed = JSON.parse(text);
+    logProperties(parsed);
 });
-
-
-//console.log({ json });
