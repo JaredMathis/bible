@@ -3,7 +3,7 @@ const {
     logIndent,
     merge,
     assert,
-    logProperties,
+    isEqualJson,
 } = require('../../utilities');
 
 logIndent(__filename, context => {
@@ -16,4 +16,5 @@ logIndent(__filename, context => {
 
     assert(isArray(parsed));
     assert(parsed.length === 66);
+    assert(isEqualJson(Object.keys(parsed[0]), []));
 });
