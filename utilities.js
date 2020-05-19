@@ -185,10 +185,23 @@ function assert(b, exitLambda) {
     });
 }
 
+function fileExists(fileName) {
+    return fs.existsSync(fileName);
+}
+
+function assertFileExists(fileName) {
+    return logIndent(assertFileExists.name, context => {
+        merge(context, {fileName});
+        assert(fileExists(fileName));
+    });
+}
+
 function readFile(fileName) {
     return logIndent(readFile.name, context => {
+        assertFileExists(fileName);
+
         merge(context, {fileName});
-        let file = fs.readFileSync('data/el_greek.json', 'utf8');
+        let file = fs.readFileSync(fileName, 'utf8');
         return file;
     });
 }
