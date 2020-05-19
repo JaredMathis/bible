@@ -3,7 +3,7 @@ const {
     assert,
     merge,
     logIndent,
-} = require('../../log');
+} = require('../../utilities/log');
 
 logIndent(__filename, context => {
     let i = 0;

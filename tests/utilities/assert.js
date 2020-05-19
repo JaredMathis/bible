@@ -1,11 +1,11 @@
 const {
     consoleLog,
     isEqualJson,
-} = require('../../log');
+} = require('../../utilities/log');
 
 const {
     assert,
-} = require('../../assert');
+} = require('../../utilities/assert');
 
 const oldConsoleLog = console.log;
 

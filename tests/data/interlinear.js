@@ -1,19 +1,19 @@
 const {
     logIndent,
     merge,
-} = require('../../log');
+} = require('../../utilities/log');
 
 const {
     isArray,
-} = require('../../core');
+} = require('../../utilities/core');
 
 const {
     assert,
-} = require('../../assert');
+} = require('../../utilities/assert');
 
 const {
     readFile,
-} = require('../../file');
+} = require('../../utilities/file');
 
 logIndent(__filename, context => {
     merge(context, {step: 'reading'});

@@ -1,16 +1,16 @@
 const {
     logIndent,
     merge,
-} = require('../../log');
+} = require('../../utilities/log');
 
 const {
     isArray,
     isEqualJson,
-} = require('../../core');
+} = require('../../utilities/core');
 
 const {
     assert,
-} = require('../../assert');
+} = require('../../utilities/assert');
 
 logIndent(__filename, context => {
     merge(context, {step: 'reading'});
