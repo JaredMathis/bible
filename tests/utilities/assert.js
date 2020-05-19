@@ -1,7 +1,7 @@
 const {
     consoleLog,
     isEqualJson,
-} = require('../../utilities');
+} = require('../../log');
 
 const {
     assert,

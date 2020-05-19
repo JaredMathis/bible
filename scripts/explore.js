@@ -4,7 +4,7 @@ const {
     merge,
     consoleLog,
     logProperties,
-} = require('../utilities');
+} = require('../log');
 
 logIndent(__filename, context => {
     merge(context, {step: 'reading'});

@@ -1,7 +1,7 @@
 const {
     logIndent,
     merge,
-} = require('./utilities');
+} = require('./log');
 
 const {
     assertFileExists,
