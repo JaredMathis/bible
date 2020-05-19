@@ -1,9 +1,12 @@
 const {
-    isArray,
     logIndent,
     merge,
-    isEqualJson,
 } = require('../../utilities');
+
+const {
+    isArray,
+    isEqualJson,
+} = require('../../core');
 
 const {
     assert,

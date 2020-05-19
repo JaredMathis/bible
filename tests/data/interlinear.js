@@ -1,8 +1,11 @@
 const {
-    isArray,
     logIndent,
     merge,
 } = require('../../utilities');
+
+const {
+    isArray,
+} = require('../../core');
 
 const {
     assert,

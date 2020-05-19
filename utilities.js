@@ -1,10 +1,13 @@
+const {
+    processExit,
+    isUndefined,
+} = require('./core');
+
 module.exports = {
     logIndent,
     consoleLog,
     merge,
-    isEqualJson,
     logProperties,
-    isArray,
 }
 
 // TODO: Validate arguments of framework
@@ -12,23 +15,6 @@ module.exports = {
 let indent = 0;
 
 let context = {};
-
-function isArray(a) {
-    return Array.isArray(a);
-}
-
-function processExit() {
-    console.log('Calling process.exit(1)');
-    process.exit(1);
-}
-
-function isEqualJson(a, b) {
-    return JSON.stringify(a) === JSON.stringify(b);
-}
-
-function isUndefined(a) {
-    return typeof a === 'undefined';
-}
 
 /**
  * Does something special with undefined.
