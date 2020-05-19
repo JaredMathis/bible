@@ -2,9 +2,12 @@ const {
     isArray,
     logIndent,
     merge,
-    assert,
     isEqualJson,
 } = require('../../utilities');
+
+const {
+    assert,
+} = require('../../assert');
 
 logIndent(__filename, context => {
     merge(context, {step: 'reading'});

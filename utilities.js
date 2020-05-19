@@ -1,11 +1,7 @@
-const fs = require('fs');
-
 module.exports = {
-    readFile,
     logIndent,
     consoleLog,
     merge,
-    assert,
     isEqualJson,
     logProperties,
     isArray,
@@ -162,46 +158,4 @@ function consoleLog(message) {
 
     
     if (log) console.log('consoleLog leaving');
-}
-
-function assert(b, exitLambda) {
-    let log = false;
-    if (log) console.log('assert entered');
-
-    if (b === true) {
-        if (log) console.log('assert satisified');
-        return;
-    }
-    return logIndent(assert.name, context => {
-        consoleLog('assert error');
-
-        merge(context, {b});
-        logProperties(context);
-
-        if (isUndefined(exitLambda)) {
-            exitLambda = processExit;
-        }
-        exitLambda();
-    });
-}
-
-function fileExists(fileName) {
-    return fs.existsSync(fileName);
-}
-
-function assertFileExists(fileName) {
-    return logIndent(assertFileExists.name, context => {
-        merge(context, {fileName});
-        assert(fileExists(fileName));
-    });
-}
-
-function readFile(fileName) {
-    return logIndent(readFile.name, context => {
-        assertFileExists(fileName);
-
-        merge(context, {fileName});
-        let file = fs.readFileSync(fileName, 'utf8');
-        return file;
-    });
 }
