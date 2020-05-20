@@ -13,9 +13,13 @@ const {
 } = require('../../utilities/log')
 
 logIndent(__filename, context => {
-    let verses = getVerses('john', 0);
+    let verses;
+    
+    verses = getVerses('john', 0);
     merge(context, {verses});
-    assertIsEqual(verses.length, 17);
-
-    console.log({verses});
+    assertIsEqual(verses.length, 51);
+    
+    verses = getVerses('john', 1);
+    merge(context, {verses});
+    assertIsEqual(verses.length, 25);
 })
