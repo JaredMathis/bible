@@ -20,13 +20,10 @@ logIndent(__filename, context => {
     let text = require('./../../data/interlinear/john');
     merge(context, {text});
 
-    merge(context, {step: 'parsing'});
-    let parsed = JSON.parse(text);
-
     merge(context, {step: 'isArray'});
-    assert(isArray(parsed));
+    assert(isArray(text));
 
     merge(context, {step: 'parsed.length'});
-    merge(context, {'parsed.length':parsed.length});
-    assert(parsed.length === 878);
+    merge(context, {'text.length':text.length});
+    assert(text.length === 878);
 });

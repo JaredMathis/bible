@@ -1,5 +1,4 @@
 require=(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({"/data/interlinear/john":[function(require,module,exports){
-const text = `
 [
     {
       "verse": [
@@ -99972,9 +99971,6 @@ const text = `
       "id": "43021025"
     }
   ]
-`;
-
-module.exports = text;
 },{}],1:[function(require,module,exports){
 
 },{}],2:[function(require,module,exports){
@@ -100167,27 +100163,59 @@ process.umask = function() { return 0; };
 const {
     logIndent,
     merge,
+    consoleLog,
+    logProperties,
 } = require('./log');
+
+const {
+    isDefined,
+    isUndefined,
+    processExit,
+    isInteger,
+    isFunction,
+} = require('./core');
 
 const fs = require('fs');
 
 module.exports = {
     assert,
     assertFileExists,
+    assertAtLeast,
+    assertAtMost,
+    assertIsEqual,
+    assertIsDefined,
+    assertIsEqualJson,
 };
 
 function assert(b, exitLambda) {
-    let log = false;
-    if (log) console.log('assert entered');
 
-    if (b === true) {
-        if (log) console.log('assert satisified');
-        return;
-    }
     return logIndent(assert.name, context => {
+        let log = false;
+
+        if (log) console.log('assert entered');
+
+        let result;
+        if (isFunction(b)) {
+            result = b();
+        } else {
+            result = b;
+        }
+
+        if (result === true) {
+            if (log) console.log('assert satisified');
+            return;
+        }
+
+        merge(context, {result});
+        merge(context, {b});
+        return assertError(exitLambda);
+    });
+}
+
+function assertError(exitLambda) {
+    return logIndent(assertError.name, context => {
         consoleLog('assert error');
 
-        merge(context, {b});
         logProperties(context);
 
         if (isUndefined(exitLambda)) {
@@ -100207,7 +100235,78 @@ function assertFileExists(fileName) {
         assert(fileExists(fileName));
     });
 }
-},{"./log":"/utilities/log","fs":1}],"/utilities/core":[function(require,module,exports){
+
+function assertIsDefined(a) {
+    return logIndent(assertIsDefined.name, context => {
+        merge(context, {a});
+        return assert(isDefined(a));
+    });
+}
+
+function assertIsEqual(left, right) {
+    return logIndent(assertIsEqual.name, context => {
+        merge(context, {left});
+        assertIsDefined(left);
+
+        merge(context, {right});
+        assertIsDefined(right);
+
+        let equals = left === right;
+        if (equals) {
+            return;
+        }
+        return assertError();
+    });
+}
+
+function assertIsEqualJson(left, right) {
+    return logIndent(assertIsEqualJson.name, context => {
+        merge(context, {left});
+        assertIsDefined(left);
+
+        merge(context, {right});
+        assertIsDefined(right);
+
+        let equals = JSON.stringify(left) === JSON.stringify(right);
+        if (equals) {
+            return;
+        }
+        return assertError();
+    });
+}
+
+function assertAtLeast(left, right) {
+    return logIndent(assertAtLeast.name, context => {
+        merge(context, {left});
+        merge(context, {right});
+
+        assert(isInteger(left));
+        assert(isInteger(right));
+
+        let atLeast = left >= right;
+        if (atLeast) {
+            return;
+        }
+        return assertError();
+    });
+}
+
+function assertAtMost(left, right) {
+    return logIndent(assertAtMost.name, context => {
+        merge(context, {left});
+        merge(context, {right});
+
+        assert(isInteger(left));
+        assert(isInteger(right));
+
+        let atMost = left <= right;
+        if (atMost) {
+            return;
+        }
+        return assertError();
+    });
+}
+},{"./core":"/utilities/core","./log":"/utilities/log","fs":1}],"/utilities/core":[function(require,module,exports){
 (function (process){
 /**
  * These functions have no dependencies
@@ -100218,10 +100317,19 @@ module.exports = {
     isEqualJson,
     isArray,
     isUndefined,
+    isDefined,
+    isInteger,
+    range,
+    isFunction,
+    isString,
 }
 
 function isArray(a) {
     return Array.isArray(a);
+}
+
+function isString(s) {
+    return (s + "") === s;
 }
 
 function processExit() {
@@ -100235,6 +100343,30 @@ function isEqualJson(a, b) {
 
 function isUndefined(a) {
     return typeof a === 'undefined';
+}
+
+function isDefined(a) {
+    return !isUndefined(a);
+}
+
+function isInteger(a) {
+    return parseInt(a, 10) === a;
+}
+
+function isFunction(functionToCheck) {
+    return functionToCheck && {}.toString.call(functionToCheck) === '[object Function]';
+}
+
+function range(count, start) {
+    if (isUndefined(start)) {
+        start = 0;
+    }
+    let result = [];
+    let max = start + count - 1;
+    for (let i = start; i <= max; i++) {
+        result.push(i);
+    }
+    return result;
 }
 }).call(this,require('_process'))
 },{"_process":2}],"/utilities/file":[function(require,module,exports){
@@ -100251,6 +100383,7 @@ const fs = require('fs');
 
 module.exports = {
     readFile,
+    getFiles,
 }
 
 function readFile(fileName) {
@@ -100262,10 +100395,21 @@ function readFile(fileName) {
         return file;
     });
 }
+
+function getFiles(directoryName) {
+    return logIndent(getFiles.name, context => {
+        assertFileExists(directoryName);
+
+        merge(context, {directoryName});
+        let result = fs.readdirSync(directoryName);
+        return result;
+    });
+}
 },{"./assert":"/utilities/assert","./log":"/utilities/log","fs":1}],"/utilities/log":[function(require,module,exports){
 const {
     processExit,
     isUndefined,
+    isFunction,
 } = require('./core');
 
 module.exports = {
@@ -100335,6 +100479,7 @@ function logProperties(object) {
 
     const maxCharacters = 120;
     for (let property in object) {
+        if (log) console.log('logProperties', {property});
         if (property === parent) {
             continue;
         }
@@ -100342,8 +100487,13 @@ function logProperties(object) {
         let o = {};
         o[property] = object[property];
 
+        if (isFunction(o[property])) {
+            o[property] = o[property].toString();
+        }
+
         let json = JSON.stringify(o);
         if (log) console.log('logProperties', {json});
+        if (log) console.log('logProperties', {keys:Object.keys(o)});
 
         let trimmed = truncateStringTo(json, maxCharacters);
         console.log(prefix + trimmed);

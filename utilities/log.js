@@ -1,6 +1,7 @@
 const {
     processExit,
     isUndefined,
+    isFunction,
 } = require('./core');
 
 module.exports = {
@@ -70,6 +71,7 @@ function logProperties(object) {
 
     const maxCharacters = 120;
     for (let property in object) {
+        if (log) console.log('logProperties', {property});
         if (property === parent) {
             continue;
         }
@@ -77,8 +79,13 @@ function logProperties(object) {
         let o = {};
         o[property] = object[property];
 
+        if (isFunction(o[property])) {
+            o[property] = o[property].toString();
+        }
+
         let json = JSON.stringify(o);
         if (log) console.log('logProperties', {json});
+        if (log) console.log('logProperties', {keys:Object.keys(o)});
 
         let trimmed = truncateStringTo(json, maxCharacters);
         console.log(prefix + trimmed);

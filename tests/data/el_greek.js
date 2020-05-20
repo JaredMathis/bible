@@ -14,12 +14,11 @@ const {
 
 logIndent(__filename, context => {
     merge(context, {step: 'reading'});
-    let text = require('./../../data/el_greek');
+    let text = require('./../../data/bibles/el_greek');
 
     merge(context, {step: 'parsing'});
     merge(context, {text});
-    let parsed = JSON.parse(text);
 
-    assert(isArray(parsed));
-    assert(parsed.length === 66);
+    assert(isArray(text));
+    assert(text.length === 66);
 });

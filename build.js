@@ -7,6 +7,11 @@ const {
     merge,
 } = require('./utilities/log');
 
+require('./scripts/verse-counts');
+require('./scripts/abbrevs');
+
+require('./tests');
+
 logIndent(__filename, context => {
     const requires = [
         './utilities/assert',

@@ -16,31 +16,53 @@ const path = require('path');
 const fs = require('fs');
 
 logIndent(__filename, () => {
-    const directory = './data';
+    const directory = './data/books';
 
-    const files = getFiles(directory)
-        // Only include json files
-        .filter(f => f.endsWith('.json'));
+    let files = getFiles(directory);
+
+    let directories = [];
     for (let f of files) {
-        let fPath = path.join(directory, f);
-        let contents = readFile(fPath);
+        let d = path.join(directory, f);
+        let isDirectory = fs.lstatSync(d).isDirectory();
+        if (isDirectory) {
+            directories.push(d);
+        }
+    }
 
-        contents = `
-let text = \`
-    ${contents}
-    \`;
-module.exports = text;
-`;
+    for (let directory of directories) {
+        files = getFiles(directory)
+            // Only include json files
+            .filter(f => f.endsWith('.json'));
 
-        // Write the output to a .js file
-        let base = path.basename(fPath, '.json');
-        let newPath = path.join(directory, base + '.js');
-        fs.writeFileSync(newPath, contents);
+        consoleLog({ files });
+        if (files.length === 0) {
+            consoleLog('no files to process');
+        }
+        for (let f of files) {
+            let fPath = path.join(directory, f);
+            let contents = readFile(fPath);
 
-        // Delete json file
-        fs.unlinkSync(fPath);
+            contents = `
+    let text = \`
+        ${contents}
+        \`;
+    module.exports = text;
+    `;
 
-        consoleLog('processed');
-        consoleLog({newPath});
+            // Write the output to a .js file
+            let base = path.basename(fPath, '.json');
+            let newPath = path.join(directory, base + '.js');
+            fs.writeFileSync(newPath, contents);
+
+            // Probably best to leave original file
+            let deleteOriginalFile = false;
+            if (deleteOriginalFile) {
+                // Delete json file
+                fs.unlinkSync(fPath);
+            }
+
+            consoleLog('processed');
+            consoleLog({ newPath });
+        }
     }
 });

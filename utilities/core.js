@@ -8,10 +8,18 @@ module.exports = {
     isArray,
     isUndefined,
     isDefined,
+    isInteger,
+    range,
+    isFunction,
+    isString,
 }
 
 function isArray(a) {
     return Array.isArray(a);
+}
+
+function isString(s) {
+    return (s + "") === s;
 }
 
 function processExit() {
@@ -29,4 +37,24 @@ function isUndefined(a) {
 
 function isDefined(a) {
     return !isUndefined(a);
+}
+
+function isInteger(a) {
+    return parseInt(a, 10) === a;
+}
+
+function isFunction(functionToCheck) {
+    return functionToCheck && {}.toString.call(functionToCheck) === '[object Function]';
+}
+
+function range(count, start) {
+    if (isUndefined(start)) {
+        start = 0;
+    }
+    let result = [];
+    let max = start + count - 1;
+    for (let i = start; i <= max; i++) {
+        result.push(i);
+    }
+    return result;
 }
