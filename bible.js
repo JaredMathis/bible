@@ -44,21 +44,27 @@ let interlinears = {};
 let verseCounts;
 let abbrevs;
 logIndent(__filename, context=> {
-    books = require('./data/books');
+    let books1 = require('./data/books');
 
-    for (let book of books) {
+    for (let book of books1) {
         merge(context, {book});
         let b = require('./data/interlinear/' + book.n);
         interlinears[book.n] = b;
     }
 
-    verseCounts = toDictionary(require('./data/bibles/verse-counts'), 'abbrev');
+    let vc = require('./data/bibles/verse-counts');
+    verseCounts = toDictionary(vc, 'abbrev');
+
+    books = vc.map(v => v.name);
 
     abbrevs = require('./data/bibles/abbrevs');
 });
 
 function getBooks() {
     return logIndent(getBooks.name, context=> {
+        merge(context, {books});
+        assert(() => books[0] === 'Genesis');
+
         return books;
     });
 }

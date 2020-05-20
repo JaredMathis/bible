@@ -17,5 +17,5 @@ logIndent(__filename, context => {
     
     assertIsDefined(books);
     assertIsEqual(books.length, 66);
-    assertIsEqualJson(books[1], {"b":2,"n":"exodus","t":"ot","g":1,"c":40});
+    assertIsEqualJson(books[1], "Exodus");
 })
