@@ -12,12 +12,13 @@ angular.module('bible', [])
 
         logIndent(ctrl, context => {
             merge(context, { step: 'reading' });
-            let text = require('./../data/el_greek');
-
-            merge(context, { step: 'parsing' });
-            merge(context, { text });
+            let text = require('/data/interlinear/john');
+        
+            merge(context, {step: 'parsing'});
+            merge(context, {text});
             let parsed = JSON.parse(text);
             logProperties(parsed);
-            console.log('here1');
+
+            $scope.parsed = parsed;
         });
     });

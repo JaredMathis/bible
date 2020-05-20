@@ -5,6 +5,8 @@
     <meta content="utf-8" http-equiv="encoding">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="style.css"></link>
 </head>
 
 <body ng-app="bible" ng-controller="HomeController">
@@ -28,7 +30,15 @@
         </div>
     </nav>
 
-    hello world {{ 1 + 3 }}
+    <div ng-repeat="p in parsed">
+        {{ $index }}
+        <span ng-repeat="word in p.verse">
+            <span ng-click="word.show = !word.show" class="cursor-pointer">
+                <!-- Sometimes the English is translated to an empty string -->
+                {{ word.show ? word.word : (word.text || '[ ]') }}
+            </span>
+        </span>
+    </div>
 
     <script src="bundle.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
