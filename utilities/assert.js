@@ -1,7 +1,14 @@
 const {
     logIndent,
     merge,
+    consoleLog,
+    logProperties,
 } = require('./log');
+
+const {
+    isUndefined,
+    processExit,
+} = require('./core');
 
 const fs = require('fs');
 
