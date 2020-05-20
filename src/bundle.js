@@ -100214,8 +100214,6 @@ function assert(b, exitLambda) {
 
 function assertError(exitLambda) {
     return logIndent(assertError.name, context => {
-        consoleLog('assert error');
-
         logProperties(context);
 
         if (isUndefined(exitLambda)) {
@@ -100443,10 +100441,12 @@ function isString(o) {
     return o.toString() === o;
 }
 
-function getPrefix() {
+function getPrefix(offset) {
+    offset = offset || 0;
+
     let tab = "  ";
     let prefix = "";
-    for (let i = 0; i < indent; i++) {
+    for (let i = 0; i < indent - offset; i++) {
         prefix += tab;
     }
     return prefix;
@@ -100462,26 +100462,30 @@ function truncateStringTo(string, maxCharacters) {
 }
 
 /**
- * Does something special if the property name is "$parent".
+ * Does something special if the property name is "parent".
  */
-function logProperties(object) {
-  let parent = '$parent';
-  let name = '$name';
+function logProperties(object, offset) {
+    offset = offset || 0;
+    let parent = '$parent';
+    let name = '$name';
 
     let log = false;
     if (log) console.log('logProperties entered', {object});
 
-    let prefix = getPrefix();
+    let prefix = getPrefix(offset);
 
     if (object.hasOwnProperty(parent)) {
-        logProperties(object[parent]);
-        console.log(prefix + '--parent');
+        logProperties(object[parent], offset + 1);
+    }
+
+    if (object.hasOwnProperty(name)) {
+        console.log(getPrefix(offset + 1) + object[name] + ' entered');
     }
 
     const maxCharacters = 120;
     for (let property in object) {
         if (log) console.log('logProperties', {property});
-        if (property === parent) {
+        if ([parent, name].includes(property)) {
             continue;
         }
 
