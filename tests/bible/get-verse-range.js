@@ -17,11 +17,11 @@ const {
 
 logIndent(__filename, context => {
     let vr;
-    vr = getVerseRange('john', 0);
+    vr = getVerseRange('John', 0);
     merge(context, {vr});
     assert(() => isEqualJson(vr, {before: 0, count:51}));
 
-    vr = getVerseRange('john', 1);
+    vr = getVerseRange('John', 1);
     merge(context, {vr});
     assert(() => isEqualJson(vr, {before: 51, count:25}));
 });

@@ -1,266 +1,332 @@
 {
-  "genesis": {
+  "Genesis": {
     "abbrev": "gn",
-    "name": "Genesis"
+    "name": "Genesis",
+    "n": "genesis"
   },
-  "exodus": {
+  "Exodus": {
     "abbrev": "ex",
-    "name": "Exodus"
+    "name": "Exodus",
+    "n": "exodus"
   },
-  "leviticus": {
+  "Leviticus": {
     "abbrev": "lv",
-    "name": "Leviticus"
+    "name": "Leviticus",
+    "n": "leviticus"
   },
-  "numbers": {
+  "Numbers": {
     "abbrev": "nm",
-    "name": "Numbers"
+    "name": "Numbers",
+    "n": "numbers"
   },
-  "deuteronomy": {
+  "Deuteronomy": {
     "abbrev": "dt",
-    "name": "Deuteronomy"
+    "name": "Deuteronomy",
+    "n": "deuteronomy"
   },
-  "joshua": {
+  "Joshua": {
     "abbrev": "js",
-    "name": "Joshua"
+    "name": "Joshua",
+    "n": "joshua"
   },
-  "judges": {
+  "Judges": {
     "abbrev": "jud",
-    "name": "Judges"
+    "name": "Judges",
+    "n": "judges"
   },
-  "ruth": {
+  "Ruth": {
     "abbrev": "rt",
-    "name": "Ruth"
+    "name": "Ruth",
+    "n": "ruth"
   },
-  "i_samuel": {
+  "1 Samuel": {
     "abbrev": "1sm",
-    "name": "1 Samuel"
+    "name": "1 Samuel",
+    "n": "i_samuel"
   },
-  "ii_samuel": {
+  "2 Samuel": {
     "abbrev": "2sm",
-    "name": "2 Samuel"
+    "name": "2 Samuel",
+    "n": "ii_samuel"
   },
-  "i_kings": {
+  "1 Kings": {
     "abbrev": "1kgs",
-    "name": "1 Kings"
+    "name": "1 Kings",
+    "n": "i_kings"
   },
-  "ii_kings": {
+  "2 Kings": {
     "abbrev": "2kgs",
-    "name": "2 Kings"
+    "name": "2 Kings",
+    "n": "ii_kings"
   },
-  "i_chronicles": {
+  "1 Chronicles": {
     "abbrev": "1ch",
-    "name": "1 Chronicles"
+    "name": "1 Chronicles",
+    "n": "i_chronicles"
   },
-  "ii_chronicles": {
+  "2 Chronicles": {
     "abbrev": "2ch",
-    "name": "2 Chronicles"
+    "name": "2 Chronicles",
+    "n": "ii_chronicles"
   },
-  "ezra": {
+  "Ezra": {
     "abbrev": "ezr",
-    "name": "Ezra"
+    "name": "Ezra",
+    "n": "ezra"
   },
-  "nehemiah": {
+  "Nehemiah": {
     "abbrev": "ne",
-    "name": "Nehemiah"
+    "name": "Nehemiah",
+    "n": "nehemiah"
   },
-  "esther": {
+  "Esther": {
     "abbrev": "et",
-    "name": "Esther"
+    "name": "Esther",
+    "n": "esther"
   },
-  "job": {
+  "Job": {
     "abbrev": "job",
-    "name": "Job"
+    "name": "Job",
+    "n": "job"
   },
-  "psalms": {
+  "Psalms": {
     "abbrev": "ps",
-    "name": "Psalms"
+    "name": "Psalms",
+    "n": "psalms"
   },
-  "proverbs": {
+  "Proverbs": {
     "abbrev": "prv",
-    "name": "Proverbs"
+    "name": "Proverbs",
+    "n": "proverbs"
   },
-  "ecclesiastes": {
+  "Ecclesiastes": {
     "abbrev": "ec",
-    "name": "Ecclesiastes"
+    "name": "Ecclesiastes",
+    "n": "ecclesiastes"
   },
-  "song_of_solomon": {
+  "Song of Solomon": {
     "abbrev": "so",
-    "name": "Song of Solomon"
+    "name": "Song of Solomon",
+    "n": "song_of_solomon"
   },
-  "isaiah": {
+  "Isaiah": {
     "abbrev": "is",
-    "name": "Isaiah"
+    "name": "Isaiah",
+    "n": "isaiah"
   },
-  "jeremiah": {
+  "Jeremiah": {
     "abbrev": "jr",
-    "name": "Jeremiah"
+    "name": "Jeremiah",
+    "n": "jeremiah"
   },
-  "lamentations": {
+  "Lamentations": {
     "abbrev": "lm",
-    "name": "Lamentations"
+    "name": "Lamentations",
+    "n": "lamentations"
   },
-  "ezekiel": {
+  "Ezekiel": {
     "abbrev": "ez",
-    "name": "Ezekiel"
+    "name": "Ezekiel",
+    "n": "ezekiel"
   },
-  "daniel": {
+  "Daniel": {
     "abbrev": "dn",
-    "name": "Daniel"
+    "name": "Daniel",
+    "n": "daniel"
   },
-  "hosea": {
+  "Hosea": {
     "abbrev": "ho",
-    "name": "Hosea"
+    "name": "Hosea",
+    "n": "hosea"
   },
-  "joel": {
+  "Joel": {
     "abbrev": "jl",
-    "name": "Joel"
+    "name": "Joel",
+    "n": "joel"
   },
-  "amos": {
+  "Amos": {
     "abbrev": "am",
-    "name": "Amos"
+    "name": "Amos",
+    "n": "amos"
   },
-  "obadiah": {
+  "Obadiah": {
     "abbrev": "ob",
-    "name": "Obadiah"
+    "name": "Obadiah",
+    "n": "obadiah"
   },
-  "jonah": {
+  "Jonah": {
     "abbrev": "jn",
-    "name": "Jonah"
+    "name": "Jonah",
+    "n": "jonah"
   },
-  "micah": {
+  "Micah": {
     "abbrev": "mi",
-    "name": "Micah"
+    "name": "Micah",
+    "n": "micah"
   },
-  "nahum": {
+  "Nahum": {
     "abbrev": "na",
-    "name": "Nahum"
+    "name": "Nahum",
+    "n": "nahum"
   },
-  "habakkuk": {
+  "Habakkuk": {
     "abbrev": "hk",
-    "name": "Habakkuk"
+    "name": "Habakkuk",
+    "n": "habakkuk"
   },
-  "zephaniah": {
+  "Zephaniah": {
     "abbrev": "zp",
-    "name": "Zephaniah"
+    "name": "Zephaniah",
+    "n": "zephaniah"
   },
-  "haggai": {
+  "Haggai": {
     "abbrev": "hg",
-    "name": "Haggai"
+    "name": "Haggai",
+    "n": "haggai"
   },
-  "zechariah": {
+  "Zechariah": {
     "abbrev": "zc",
-    "name": "Zechariah"
+    "name": "Zechariah",
+    "n": "zechariah"
   },
-  "malachi": {
+  "Malachi": {
     "abbrev": "ml",
-    "name": "Malachi"
+    "name": "Malachi",
+    "n": "malachi"
   },
-  "matthew": {
+  "Matthew": {
     "abbrev": "mt",
-    "name": "Matthew"
+    "name": "Matthew",
+    "n": "matthew"
   },
-  "mark": {
+  "Mark": {
     "abbrev": "mk",
-    "name": "Mark"
+    "name": "Mark",
+    "n": "mark"
   },
-  "luke": {
+  "Luke": {
     "abbrev": "lk",
-    "name": "Luke"
+    "name": "Luke",
+    "n": "luke"
   },
-  "john": {
+  "John": {
     "abbrev": "jo",
-    "name": "John"
+    "name": "John",
+    "n": "john"
   },
-  "acts": {
+  "Acts": {
     "abbrev": "act",
-    "name": "Acts"
+    "name": "Acts",
+    "n": "acts"
   },
-  "romans": {
+  "Romans": {
     "abbrev": "rm",
-    "name": "Romans"
+    "name": "Romans",
+    "n": "romans"
   },
-  "i_corinthians": {
+  "1 Corinthians": {
     "abbrev": "1co",
-    "name": "1 Corinthians"
+    "name": "1 Corinthians",
+    "n": "i_corinthians"
   },
-  "ii_corinthians": {
+  "2 Corinthians": {
     "abbrev": "2co",
-    "name": "2 Corinthians"
+    "name": "2 Corinthians",
+    "n": "ii_corinthians"
   },
-  "galatians": {
+  "Galatians": {
     "abbrev": "gl",
-    "name": "Galatians"
+    "name": "Galatians",
+    "n": "galatians"
   },
-  "ephesians": {
+  "Ephesians": {
     "abbrev": "eph",
-    "name": "Ephesians"
+    "name": "Ephesians",
+    "n": "ephesians"
   },
-  "philippians": {
+  "Philippians": {
     "abbrev": "ph",
-    "name": "Philippians"
+    "name": "Philippians",
+    "n": "philippians"
   },
-  "colossians": {
+  "Colossians": {
     "abbrev": "cl",
-    "name": "Colossians"
+    "name": "Colossians",
+    "n": "colossians"
   },
-  "i_thessalonians": {
+  "1 Thessalonians": {
     "abbrev": "1ts",
-    "name": "1 Thessalonians"
+    "name": "1 Thessalonians",
+    "n": "i_thessalonians"
   },
-  "ii_thessalonians": {
+  "2 Thessalonians": {
     "abbrev": "2ts",
-    "name": "2 Thessalonians"
+    "name": "2 Thessalonians",
+    "n": "ii_thessalonians"
   },
-  "i_timothy": {
+  "1 Timothy": {
     "abbrev": "1tm",
-    "name": "1 Timothy"
+    "name": "1 Timothy",
+    "n": "i_timothy"
   },
-  "ii_timothy": {
+  "2 Timothy": {
     "abbrev": "2tm",
-    "name": "2 Timothy"
+    "name": "2 Timothy",
+    "n": "ii_timothy"
   },
-  "titus": {
+  "Titus": {
     "abbrev": "tt",
-    "name": "Titus"
+    "name": "Titus",
+    "n": "titus"
   },
-  "philemon": {
+  "Philemon": {
     "abbrev": "phm",
-    "name": "Philemon"
+    "name": "Philemon",
+    "n": "philemon"
   },
-  "hebrews": {
+  "Hebrews": {
     "abbrev": "hb",
-    "name": "Hebrews"
+    "name": "Hebrews",
+    "n": "hebrews"
   },
-  "james": {
+  "James": {
     "abbrev": "jm",
-    "name": "James"
+    "name": "James",
+    "n": "james"
   },
-  "i_peter": {
+  "1 Peter": {
     "abbrev": "1pe",
-    "name": "1 Peter"
+    "name": "1 Peter",
+    "n": "i_peter"
   },
-  "ii_peter": {
+  "2 Peter": {
     "abbrev": "2pe",
-    "name": "2 Peter"
+    "name": "2 Peter",
+    "n": "ii_peter"
   },
-  "i_john": {
+  "1 John": {
     "abbrev": "1jo",
-    "name": "1 John"
+    "name": "1 John",
+    "n": "i_john"
   },
-  "ii_john": {
+  "2 John": {
     "abbrev": "2jo",
-    "name": "2 John"
+    "name": "2 John",
+    "n": "ii_john"
   },
-  "iii_john": {
+  "3 John": {
     "abbrev": "3jo",
-    "name": "3 John"
+    "name": "3 John",
+    "n": "iii_john"
   },
-  "jude": {
+  "Jude": {
     "abbrev": "jd",
-    "name": "Jude"
+    "name": "Jude",
+    "n": "jude"
   },
-  "revelation": {
+  "Revelation": {
     "abbrev": "re",
-    "name": "Revelation"
+    "name": "Revelation",
+    "n": "revelation"
   }
 }

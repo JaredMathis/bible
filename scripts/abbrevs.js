@@ -14,6 +14,7 @@ const {
 
 const {
     loop,
+    toDictionary,
 } = require('../utilities/tools');
 
 const fs = require('fs');
@@ -34,12 +35,12 @@ logIndent(__filename, context => {
             delete b.chapters;
         }
     });
-
-    let result = {};
     
     loop(books, (b, i)  => {
-        result[books[i].n] = bible[i];
+        bible[i].n = books[i].n;
     });
+
+    let result = toDictionary(bible, 'name');
     merge(context, {result});
 
     let json = JSON.stringify(result, ' ', 2);

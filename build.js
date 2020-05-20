@@ -9,9 +9,10 @@ const {
 
 require('./scripts/verse-counts');
 require('./scripts/json-to-js');
+require('./scripts/copy-el_greek.safe');
 require('./scripts/abbrevs');
 
-require('./tests');
+require('./test');
 
 logIndent(__filename, context => {
     const requires = [

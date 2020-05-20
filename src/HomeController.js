@@ -15,14 +15,15 @@ angular.module('bible', [])
     .controller(ctrl, function ($scope) {
 
         logIndent(ctrl, context => {
-            let books = getBooks();
-            consoleLog({books});
+            $scope.books = getBooks();
+
+            $scope.selectedBook = 'John';
 
             merge(context, { step: 'reading' });
             let text = require('/data/interlinear/john');
         
-            consoleLog({text});
-            logProperties(text);
+            //consoleLog({text});
+            //logProperties(text);
 
             $scope.parsed = text;
         });

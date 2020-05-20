@@ -3,6 +3,11 @@ Run:
 npm i browserify -g
 
 
+To run tests:
+> node test
+
+To build website:
+> node build
 
 
 data

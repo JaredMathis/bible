@@ -44,8 +44,8 @@ let interlinears = {};
 let verseCounts;
 let abbrevs;
 logIndent(__filename, context=> {
-    interlinears['genesis'] = require('./data/interlinear/genesis');
-    interlinears['john'] = require('./data/interlinear/john');
+    interlinears['Genesis'] = require('./data/interlinear/genesis');
+    interlinears['John'] = require('./data/interlinear/john');
 
     let vc = require('./data/bibles/verse-counts');
     verseCounts = toDictionary(vc, 'abbrev');
@@ -64,10 +64,36 @@ function getBooks() {
     });
 }
 
-function getVerseRange(book, chapter) {
-    return logIndent(getVerseRange.name, context=> {
-        merge(context, {chapter});
-        assert(() => isInteger(chapter));
+function getChapterCount(book) {
+    return logIndent(getChapterCount.name, context=> {
+        assertIsBook(book);
+
+        let abbrev = getAbbrev(book);
+
+        let b = verseCounts[abbrev];
+        merge(context, {b})
+
+        assert(false);
+
+        return books;
+    });
+}
+
+function assertIsBook(book) {
+    return logIndent(assertIsBook.name, context=> {
+        merge(context, {book});
+        assert(() => isDefined(book));
+        assert(() => isString(book));
+        assert(() => books.includes(book));
+
+        return books;
+    });
+}
+
+function getAbbrev(book) {
+    let abbrev;
+    logIndent(getAbbrev.name, context=> {
+        assertIsBook(book);
 
         merge(context, {abbrevs});
 
@@ -75,9 +101,19 @@ function getVerseRange(book, chapter) {
         merge(context, {a});
         assert(() => isDefined(a));
 
-        let abbrev = a.abbrev;
+        abbrev = a.abbrev;
         merge(context, {abbrev});
         assert(() => isString(abbrev));
+    });
+    return abbrev;
+}
+
+function getVerseRange(book, chapter) {
+    return logIndent(getVerseRange.name, context=> {
+        merge(context, {chapter});
+        assert(() => isInteger(chapter));
+
+        let abbrev = getAbbrev(book);
 
         merge(context, {verseCounts});
         let counts = verseCounts[abbrev];
