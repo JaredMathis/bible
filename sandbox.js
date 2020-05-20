@@ -7,11 +7,7 @@ const {
 } = require('./utilities/log');
 
 logIndent(__filename, context => {
-    merge(context, {step: 'reading'});
-    let text = require('./data/books/john/1');
+    let text = require('./data/interlinear/john');
 
-    merge(context, {step: 'parsing'});
-    merge(context, {text});
-    let parsed = JSON.parse(text);
-    logProperties(parsed);
+    consoleLog({text})
 });

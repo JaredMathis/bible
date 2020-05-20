@@ -8,6 +8,7 @@ const {
 } = require('./utilities/log');
 
 require('./scripts/verse-counts');
+require('./scripts/json-to-js');
 require('./scripts/abbrevs');
 
 require('./tests');
@@ -18,7 +19,9 @@ logIndent(__filename, context => {
         './utilities/core',
         './utilities/file',
         './utilities/log',
+        './data/interlinear/genesis',
         './data/interlinear/john',
+        './bible',
     ];
     
     let command = `

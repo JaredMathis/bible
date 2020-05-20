@@ -44,13 +44,8 @@ let interlinears = {};
 let verseCounts;
 let abbrevs;
 logIndent(__filename, context=> {
-    let books1 = require('./data/books');
-
-    for (let book of books1) {
-        merge(context, {book});
-        let b = require('./data/interlinear/' + book.n);
-        interlinears[book.n] = b;
-    }
+    interlinears['genesis'] = require('./data/interlinear/genesis');
+    interlinears['john'] = require('./data/interlinear/john');
 
     let vc = require('./data/bibles/verse-counts');
     verseCounts = toDictionary(vc, 'abbrev');

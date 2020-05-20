@@ -1,3 +1,15 @@
+/**
+ * When using browserify,
+ * when calling require,
+ * when it's a json file
+ * doesn't seem to work.
+ * 
+ * Making the JSON file a thinly-wrapped JavaScript file
+ * works.
+ * 
+ * That's what this script does.
+ */
+
 const {
     logIndent,
     consoleLog,
@@ -15,54 +27,58 @@ const {
 const path = require('path');
 const fs = require('fs');
 
-logIndent(__filename, () => {
-    const directory = './data/books';
+const log = false;
 
+logIndent(__filename, () => {
+
+    const directory = './data';
+
+    processDirectory(directory);
+});
+
+function processDirectory(directory) {
+    if (log) consoleLog({directory});
     let files = getFiles(directory);
 
-    let directories = [];
     for (let f of files) {
         let d = path.join(directory, f);
         let isDirectory = fs.lstatSync(d).isDirectory();
         if (isDirectory) {
-            directories.push(d);
+            processDirectory(d);
+        } else {
+            processFile(directory, f);
         }
     }
+}
 
-    for (let directory of directories) {
-        files = getFiles(directory)
-            // Only include json files
-            .filter(f => f.endsWith('.json'));
-
-        consoleLog({ files });
-        if (files.length === 0) {
-            consoleLog('no files to process');
-        }
-        for (let f of files) {
-            let fPath = path.join(directory, f);
-            let contents = readFile(fPath);
-
-            contents = `
-    let text = \`
-        ${contents}
-        \`;
-    module.exports = text;
-    `;
-
-            // Write the output to a .js file
-            let base = path.basename(fPath, '.json');
-            let newPath = path.join(directory, base + '.js');
-            fs.writeFileSync(newPath, contents);
-
-            // Probably best to leave original file
-            let deleteOriginalFile = false;
-            if (deleteOriginalFile) {
-                // Delete json file
-                fs.unlinkSync(fPath);
-            }
-
-            consoleLog('processed');
-            consoleLog({ newPath });
-        }
+function processFile(directory, f) {
+    if (!f.endsWith('.json')) {
+        if (log) consoleLog('skipping ' + path.join(directory, f));
+        return;
     }
-});
+    let fPath = path.join(directory, f);
+    let contents = readFile(fPath);
+
+    contents = `
+let json = \`
+${contents}
+\`;
+let parsed = JSON.parse(json);
+module.exports = parsed;
+`;
+
+    // Write the output to a .js file
+    let base = path.basename(fPath, '.json');
+    let newPath = path.join(directory, base + '.js');
+    fs.writeFileSync(newPath, contents);
+
+    // Probably best to leave original file
+    let deleteOriginalFile = false;
+    if (deleteOriginalFile) {
+        // Delete json file
+        fs.unlinkSync(fPath);
+    }
+
+    if (log) consoleLog('processed');
+    if (log) consoleLog({ newPath });
+}

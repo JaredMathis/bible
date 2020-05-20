@@ -6,19 +6,24 @@ const {
     logProperties,
 } = require('/utilities/log');
 
+const {
+    getBooks,
+} = require('/bible');
+
 const ctrl = 'HomeController';
 angular.module('bible', [])
     .controller(ctrl, function ($scope) {
 
         logIndent(ctrl, context => {
+            let books = getBooks();
+            consoleLog({books});
+
             merge(context, { step: 'reading' });
             let text = require('/data/interlinear/john');
         
-            merge(context, {step: 'parsing'});
-            merge(context, {text});
-            let parsed = JSON.parse(text);
-            logProperties(parsed);
+            consoleLog({text});
+            logProperties(text);
 
-            $scope.parsed = parsed;
+            $scope.parsed = text;
         });
     });
