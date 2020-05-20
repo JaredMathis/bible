@@ -23,6 +23,7 @@ module.exports = {
  * Return true to break out of loop.
  */
 function loop(array, lambda) {
+    let log = false;
     logIndent(loop.name, context => {
         merge(context, {array});
         merge(context, {lambda});
@@ -40,7 +41,7 @@ function loop(array, lambda) {
             }
         }
 
-        consoleLog({iterations});
+        if (log) consoleLog({iterations});
     })
 }
 

@@ -52,8 +52,6 @@ function assert(b, exitLambda) {
 
 function assertError(exitLambda) {
     return logIndent(assertError.name, context => {
-        consoleLog('assert error');
-
         logProperties(context);
 
         if (isUndefined(exitLambda)) {

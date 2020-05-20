@@ -100462,10 +100462,11 @@ function truncateStringTo(string, maxCharacters) {
 }
 
 /**
- * Does something special if the property name is "parent".
+ * Does something special if the property name is "$parent".
  */
 function logProperties(object) {
-    let parent = 'parent';
+  let parent = '$parent';
+  let name = '$name';
 
     let log = false;
     if (log) console.log('logProperties entered', {object});
@@ -100473,7 +100474,7 @@ function logProperties(object) {
     let prefix = getPrefix();
 
     if (object.hasOwnProperty(parent)) {
-        logProperties(object.parent);
+        logProperties(object[parent]);
         console.log(prefix + '--parent');
     }
 
@@ -100503,15 +100504,15 @@ function logProperties(object) {
 function logIndent(name, lambda) {
     let log = false;
     if (log) console.log('logIndent entered');
-
-    consoleLog(name + " entered");
+    if (log) consoleLog(name + " entered");
 
     let result;
 
     indent++;
     let oldContext = context;
     newContext = {};
-    newContext.parent = oldContext;
+    newContext.$name = name; 
+    newContext.$parent = oldContext;
     context = newContext;
     try {
         result = lambda(context);
@@ -100524,7 +100525,7 @@ function logIndent(name, lambda) {
     context = oldContext;
     indent--;
 
-    consoleLog(name + " leaving");
+    if (log) consoleLog(name + " leaving");
 
     return result;
 }

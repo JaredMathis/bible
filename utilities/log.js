@@ -35,10 +35,12 @@ function isString(o) {
     return o.toString() === o;
 }
 
-function getPrefix() {
+function getPrefix(offset) {
+    offset = offset || 0;
+
     let tab = "  ";
     let prefix = "";
-    for (let i = 0; i < indent; i++) {
+    for (let i = 0; i < indent - offset; i++) {
         prefix += tab;
     }
     return prefix;
@@ -56,23 +58,28 @@ function truncateStringTo(string, maxCharacters) {
 /**
  * Does something special if the property name is "parent".
  */
-function logProperties(object) {
-    let parent = 'parent';
+function logProperties(object, offset) {
+    offset = offset || 0;
+    let parent = '$parent';
+    let name = '$name';
 
     let log = false;
     if (log) console.log('logProperties entered', {object});
 
-    let prefix = getPrefix();
+    let prefix = getPrefix(offset);
 
     if (object.hasOwnProperty(parent)) {
-        logProperties(object.parent);
-        console.log(prefix + '--parent');
+        logProperties(object[parent], offset + 1);
+    }
+
+    if (object.hasOwnProperty(name)) {
+        console.log(getPrefix(offset + 1) + object[name] + ' entered');
     }
 
     const maxCharacters = 120;
     for (let property in object) {
         if (log) console.log('logProperties', {property});
-        if (property === parent) {
+        if ([parent, name].includes(property)) {
             continue;
         }
 
@@ -95,15 +102,15 @@ function logProperties(object) {
 function logIndent(name, lambda) {
     let log = false;
     if (log) console.log('logIndent entered');
-
-    consoleLog(name + " entered");
+    if (log) consoleLog(name + " entered");
 
     let result;
 
     indent++;
     let oldContext = context;
     newContext = {};
-    newContext.parent = oldContext;
+    newContext.$name = name; 
+    newContext.$parent = oldContext;
     context = newContext;
     try {
         result = lambda(context);
@@ -116,7 +123,7 @@ function logIndent(name, lambda) {
     context = oldContext;
     indent--;
 
-    consoleLog(name + " leaving");
+    if (log) consoleLog(name + " leaving");
 
     return result;
 }

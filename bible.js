@@ -122,7 +122,7 @@ function getVerses(book, chapter) {
 
         let r = range(count, before);
         merge(context, {r});
-        
+
         let verses = r.map(i => interlinears[book][i]);
         merge(context, {verses});
 
