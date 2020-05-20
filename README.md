@@ -1,3 +1,10 @@
+Install:
+Run:
+npm i browserify -g
+
+
+
+
 data
 
 el_greek.js from https://raw.githubusercontent.com/thiagobodruk/bible/master/json/el_greek.json
