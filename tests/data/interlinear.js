@@ -17,7 +17,7 @@ const {
 
 logIndent(__filename, context => {
     merge(context, {step: 'reading'});
-    let text = readFile('data/interlinear/john.json');
+    let text = require('./../../data/interlinear/john');
     merge(context, {text});
 
     merge(context, {step: 'parsing'});

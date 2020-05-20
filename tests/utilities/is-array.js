@@ -1,9 +1,15 @@
 const {
-    isArray,
-    assert,
     merge,
     logIndent,
 } = require('../../utilities/log');
+
+const {
+    isArray,
+} = require('../../utilities/core');
+
+const {
+    assert,
+} = require('../../utilities/assert');
 
 logIndent(__filename, context => {
     let i = 0;

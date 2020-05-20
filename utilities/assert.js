@@ -21,16 +21,18 @@ module.exports = {
 };
 
 function assert(b, exitLambda) {
-    let log = false;
-    if (log) console.log('assert entered');
+    return logIndent(assert.name, context => {
+        let log = false;
+        if (log) console.log('assert entered');
 
-    if (b === true) {
-        if (log) console.log('assert satisified');
-        return;
-    }
+        if (b === true) {
+            if (log) console.log('assert satisified');
+            return;
+        }
 
-    merge(context, {b});
-    return assertError(exitLambda);
+        merge(context, {b});
+        return assertError(exitLambda);
+    });
 }
 
 function assertError(exitLambda) {
@@ -66,14 +68,16 @@ function assertIsDefined(a) {
 
 function assertIsEqual(left, right) {
     return logIndent(assertIsEqual.name, context => {
+        merge(context, {left});
         assertIsDefined(left);
+
+        merge(context, {right});
         assertIsDefined(right);
+
         let equals = left === right;
         if (equals) {
             return;
         }
-        merge(context, {left});
-        merge(context, {right});
         return assertError();
     });
 }
