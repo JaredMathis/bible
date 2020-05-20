@@ -7,6 +7,7 @@ module.exports = {
     isEqualJson,
     isArray,
     isUndefined,
+    isDefined,
 }
 
 function isArray(a) {
@@ -24,4 +25,8 @@ function isEqualJson(a, b) {
 
 function isUndefined(a) {
     return typeof a === 'undefined';
+}
+
+function isDefined(a) {
+    return !isUndefined(a);
 }
