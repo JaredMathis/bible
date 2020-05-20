@@ -29,6 +29,7 @@ module.exports = {
     getBooks,
     getVerses,
     getVerseRange,
+    getChapterCount,
 };
 
 function is1Kings22Quirk(book, chapter) {
@@ -70,12 +71,12 @@ function getChapterCount(book) {
 
         let abbrev = getAbbrev(book);
 
-        let b = verseCounts[abbrev];
-        merge(context, {b})
+        let counts = verseCounts[abbrev];
+        merge(context, {b: counts});
+        assert(() => isDefined(counts));
+        assert(() => isArray(counts.chapters));
 
-        assert(false);
-
-        return books;
+        return counts.chapters.length;
     });
 }
 
