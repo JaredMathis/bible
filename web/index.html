@@ -40,12 +40,15 @@
     <button ng-click="previousChapter()">Previous Chapter</button>
     <button ng-click="nextChapter()">Next Chapter</button>
 
+    <button ng-click="textLarger()">Text Larger</button>
+    <button ng-click="textSmaller()">Text Smaller</button>
+
     <div ng-repeat="p in verses">
         <sup>{{ $index + 1 }}</sup>
         <span ng-repeat="word in p.verse">
-            <span ng-click="clickWord(word)" class="cursor-pointer">
+            <span ng-click="clickWord(word)" class="cursor-pointer" ng-style="{ 'font-size': (state.fontSizeFactor * .2 + 1) + 'em' }">
                 <!-- Sometimes the English is translated to an empty string -->
-                <span class="bracket">(</span><span ng-class="{ 'greek':toggledWords[word.word] }">{{ toggledWords[word.word] ? word.word : (word.text || ' ') }}</span><span class="bracket">)</span>
+                <span class="bracket" >(</span><span ng-class="{ 'translated':state.toggledWords[word.word] }">{{ state.toggledWords[word.word] ? word.word : (word.text || ' ') }}</span><span class="bracket">)</span>
             </span>
         </span>
     </div>
