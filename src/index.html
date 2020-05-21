@@ -12,18 +12,22 @@
 <body ng-app="bible" ng-controller="HomeController">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">Intralinear Bible</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
-        </button>
+        </button> -->
 
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
+                Book <li class="nav-item">
                     <select 
                     ng-options="book for book in books"
+                    ng-change="resetChapter()"
                     ng-model="selectedBook"></select>                
+                </li>
+                Chapter <li class="nav-item" ng-show="selectedBook">
+                    <select 
+                    ng-options="chapter as (chapter + 1) for chapter in chapters"
+                    ng-model="selectedChapter"></select>                
                 </li>
             </ul>
             <!-- <form class="form-inline my-2 my-lg-0">
@@ -33,17 +37,21 @@
         </div>
     </nav>
 
-    {{ books }}
+    <button ng-click="previousChapter()">Previous Chapter</button>
+    <button ng-click="nextChapter()">Next Chapter</button>
 
-    <div ng-repeat="p in parsed">
-        {{ $index }}
+    <div ng-repeat="p in verses">
+        <sup>{{ $index + 1 }}</sup>
         <span ng-repeat="word in p.verse">
             <span ng-click="word.show = !word.show" class="cursor-pointer">
                 <!-- Sometimes the English is translated to an empty string -->
-                {{ word.show ? word.word : (word.text || '[ ]') }}
+                <span class="bracket">(</span><span ng-class="{ 'greek':word.show }">{{ word.show ? word.word : (word.text || ' ') }}</span><span class="bracket">)</span>
             </span>
         </span>
     </div>
+
+    <button ng-click="previousChapter()">Previous Chapter</button>
+    <button ng-click="nextChapter()">Next Chapter</button>
 
     <script src="bundle.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>

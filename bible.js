@@ -46,6 +46,7 @@ let verseCounts;
 let abbrevs;
 logIndent(__filename, context=> {
     interlinears['Genesis'] = require('./data/interlinear/genesis');
+    interlinears['Luke'] = require('./data/interlinear/luke');
     interlinears['John'] = require('./data/interlinear/john');
 
     let vc = require('./data/bibles/verse-counts');
