@@ -40,10 +40,7 @@ logIndent(__filename, context => {
         bible[i].n = books[i].n;
     });
 
-    let result = toDictionary(bible, 'name');
-    merge(context, {result});
-
-    let json = JSON.stringify(result, ' ', 2);
+    let json = JSON.stringify(bible, ' ', 2);
 
     fs.writeFileSync('./data/bibles/abbrevs.json', json);
 });

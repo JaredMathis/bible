@@ -45,16 +45,15 @@ let interlinears = {};
 let verseCounts;
 let abbrevs;
 logIndent(__filename, context=> {
-    interlinears['Genesis'] = require('./data/interlinear/genesis');
-    interlinears['Luke'] = require('./data/interlinear/luke');
-    interlinears['John'] = require('./data/interlinear/john');
+    interlinears = require('./generated/interlinears');
 
     let vc = require('./data/bibles/verse-counts');
     verseCounts = toDictionary(vc, 'abbrev');
 
     books = vc.map(v => v.name);
 
-    abbrevs = require('./data/bibles/abbrevs');
+    let a = require('./data/bibles/abbrevs');
+    abbrevs = toDictionary(a, 'name');
 });
 
 function getBooks() {
