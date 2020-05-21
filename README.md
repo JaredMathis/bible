@@ -1,13 +1,16 @@
-Install:
+To setup:
 Run:
 npm i browserify -g
-
 
 To run tests:
 > node test
 
-To build website:
+To build website (runs tests):
 > node build
+
+To view website:
+First build,
+Then open web/index.html
 
 
 data

@@ -6,4 +6,4 @@
 
 const fs = require('fs');
 
-fs.copyFileSync('./data/bibles/el_greek.safe.js', './data/bibles/el_greek.js');
+fs.copyFileSync('./data/bibles/el_greek.js.safe', './data/bibles/el_greek.js');
