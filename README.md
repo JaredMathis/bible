@@ -1,5 +1,6 @@
 To setup:
 Run:
+npm i
 npm i browserify -g
 
 To run tests:
