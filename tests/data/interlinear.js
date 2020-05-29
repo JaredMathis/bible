@@ -1,29 +1,14 @@
-const {
-    logIndent,
-    merge,
-} = require('../../utilities/log');
+const u = require('wlj-utilities');
 
-const {
-    isArray,
-} = require('../../utilities/core');
-
-const {
-    assert,
-} = require('../../utilities/assert');
-
-const {
-    readFile,
-} = require('../../utilities/file');
-
-logIndent(__filename, context => {
-    merge(context, {step: 'reading'});
+u.scope(__filename, context => {
+    u.merge(context, {step: 'reading'});
     let text = require('./../../data/interlinear/john');
-    merge(context, {text});
+    u.merge(context, {text});
 
-    merge(context, {step: 'isArray'});
-    assert(isArray(text));
+    u.merge(context, {step: 'isArray'});
+    u.assert(() => u.isArray(text));
 
-    merge(context, {step: 'parsed.length'});
-    merge(context, {'text.length':text.length});
-    assert(text.length === 878);
+    u.merge(context, {step: 'parsed.length'});
+    u.merge(context, {'text.length':text.length});
+    u.assert(text.length === 878);
 });

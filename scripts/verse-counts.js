@@ -1,30 +1,14 @@
-
-const {
-    logIndent,
-    merge,
-} = require('./../utilities/log');
-
-const {
-    assert,
-} = require('./../utilities/assert');
-
-const {
-    isArray,
-} = require('./../utilities/core');
-
-const {
-    loop,
-} = require('./../utilities/tools');
+const u = require('wlj-utilities');
 
 const fs = require('fs');
 
-logIndent(__filename, context => {
+u.scope(__filename, context => {
     let bible = require('./../data/bibles/el_greek');
-    merge(context, bible);
+    u.merge(context, bible);
 
-    assert(() => isArray(bible));
+    u.assert(() => u.isArray(bible));
 
-    loop(bible, b => {
+    u.loop(bible, b => {
         for (let i in b.chapters) {
             b.chapters[i] = b.chapters[i].length;
         }

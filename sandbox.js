@@ -1,13 +1,13 @@
 const {
     readFile,
-    logIndent,
+    u.scope,
     merge,
-    consoleLog,
+    console.log,
     logProperties,
 } = require('./utilities/log');
 
-logIndent(__filename, context => {
+u.scope(__filename, context => {
     let text = require('./data/interlinear/john');
 
-    consoleLog({text})
+    console.log({text})
 });

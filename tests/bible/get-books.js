@@ -2,20 +2,12 @@ const {
     getBooks
 } = require('../../bible');
 
-const {
-    assertIsEqual,
-    assertIsDefined,
-    assertIsEqualJson,
-} = require('../../utilities/assert')
+const u = require('wlj-utilities');
 
-const {
-    logIndent
-} = require('../../utilities/log')
-
-logIndent(__filename, context => {
+u.scope(__filename, context => {
     let books = getBooks();
     
-    assertIsDefined(books);
-    assertIsEqual(books.length, 66);
-    assertIsEqualJson(books[1], "Exodus");
+    u.assertIsDefined(books);
+    u.assertIsEqual(books.length, 66);
+    u.assertIsEqualJson(books[1], "Exodus");
 })

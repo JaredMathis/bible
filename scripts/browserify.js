@@ -1,16 +1,10 @@
 const { execSync } = require('child_process');
 
-const { 
-    logIndent,
-    merge,
-} = require('./../utilities/log');
+const u = require('wlj-utilities');
 
-logIndent(__filename, context => {
+u.scope(__filename, context => {
     const requires = [
-        './utilities/assert',
-        './utilities/core',
-        './utilities/file',
-        './utilities/log',
+        'wlj-utilities',
         './data/interlinear/genesis',
         './data/interlinear/john',
         './bible',
@@ -20,6 +14,6 @@ logIndent(__filename, context => {
     browserify ${requires.map(f => '-r ' + f).join(' ')} > web/bundle.js
     `;
 
-    merge(context, {command});
+    u.merge(context, {command});
     execSync(command);
 })

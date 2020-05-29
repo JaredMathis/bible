@@ -9,27 +9,14 @@
  * 
  * That's what this script does.
  */
-
-const {
-    logIndent,
-    consoleLog,
-} = require('../utilities/log');
-
-const {
-    getFiles,
-    readFile,
-} = require('../utilities/file');
-
-const {
-    assertFileExists,
-} = require('../utilities/assert');
+const u = require('wlj-utilities');
 
 const path = require('path');
 const fs = require('fs');
 
 const log = false;
 
-logIndent(__filename, () => {
+u.scope(__filename, () => {
 
     const directory = './data';
 
@@ -37,8 +24,8 @@ logIndent(__filename, () => {
 });
 
 function processDirectory(directory) {
-    if (log) consoleLog({directory});
-    let files = getFiles(directory);
+    if (log) console.log({directory});
+    let files = u.getFiles(directory);
 
     for (let f of files) {
         let d = path.join(directory, f);
@@ -53,11 +40,11 @@ function processDirectory(directory) {
 
 function processFile(directory, f) {
     if (!f.endsWith('.json')) {
-        if (log) consoleLog('skipping ' + path.join(directory, f));
+        if (log) console.log('skipping ' + path.join(directory, f));
         return;
     }
     let fPath = path.join(directory, f);
-    let contents = readFile(fPath);
+    let contents = u.readFile(fPath);
 
     contents = `
 let json = \`
@@ -79,6 +66,6 @@ module.exports = parsed;
         fs.unlinkSync(fPath);
     }
 
-    if (log) consoleLog('processed');
-    if (log) consoleLog({ newPath });
+    if (log) console.log('processed');
+    if (log) console.log({ newPath });
 }

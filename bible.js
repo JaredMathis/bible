@@ -1,29 +1,4 @@
-const {
-    logIndent,
-    merge,
-    consoleLog,
-} = require('./utilities/log');
-
-const {
-    loop,
-    toDictionary,
-} = require('./utilities/tools');
-
-const {
-    assert,
-    assertAtLeast,
-    assertAtMost,
-    assertIsDefined,
-} = require('./utilities/assert');
-
-const {
-    isInteger,
-    isArray,
-    isDefined,
-    processExit,
-    range,
-    isString,
-} = require('./utilities/core');
+const u = require('wlj-utilities');
 
 module.exports = {
     getBooks,
@@ -35,7 +10,7 @@ module.exports = {
 function is1Kings22Quirk(book, chapter) {
     let isQuirk = book === "i_kings" && chapter === 22;
     if (isQuirk) {
-        consoleLog('Needs fixing! ' + is1Kings22Quirk.name);
+        console.log('Needs fixing! ' + is1Kings22Quirk.name);
     }
     return isQuirk;
 }
@@ -44,48 +19,48 @@ let books;
 let interlinears = {};
 let verseCounts;
 let abbrevs;
-logIndent(__filename, context=> {
+u.scope(__filename, context=> {
     interlinears = require('./generated/interlinears');
 
     let vc = require('./data/bibles/verse-counts');
-    verseCounts = toDictionary(vc, 'abbrev');
+    verseCounts = u.toDictionary(vc, 'abbrev');
 
     books = vc.map(v => v.name);
 
     let a = require('./data/bibles/abbrevs');
-    abbrevs = toDictionary(a, 'name');
+    abbrevs = u.toDictionary(a, 'name');
 });
 
 function getBooks() {
-    return logIndent(getBooks.name, context=> {
-        merge(context, {books});
-        assert(() => books[0] === 'Genesis');
+    return u.scope(getBooks.name, context=> {
+        u.merge(context, {books});
+        u.assert(() => books[0] === 'Genesis');
 
         return books;
     });
 }
 
 function getChapterCount(book) {
-    return logIndent(getChapterCount.name, context=> {
+    return u.scope(getChapterCount.name, context=> {
         assertIsBook(book);
 
         let abbrev = getAbbrev(book);
 
         let counts = verseCounts[abbrev];
-        merge(context, {b: counts});
-        assert(() => isDefined(counts));
-        assert(() => isArray(counts.chapters));
+        u.merge(context, {b: counts});
+        u.assert(() => u.isDefined(counts));
+        u.assert(() => u.isArray(counts.chapters));
 
         return counts.chapters.length;
     });
 }
 
 function assertIsBook(book) {
-    return logIndent(assertIsBook.name, context=> {
-        merge(context, {book});
-        assert(() => isDefined(book));
-        assert(() => isString(book));
-        assert(() => books.includes(book));
+    return u.scope(assertIsBook.name, context=> {
+        u.merge(context, {book});
+        u.assert(() => u.isDefined(book));
+        u.assert(() => u.isString(book));
+        u.assert(() => books.includes(book));
 
         return books;
     });
@@ -93,37 +68,37 @@ function assertIsBook(book) {
 
 function getAbbrev(book) {
     let abbrev;
-    logIndent(getAbbrev.name, context=> {
+    u.scope(getAbbrev.name, context=> {
         assertIsBook(book);
 
-        merge(context, {abbrevs});
+        u.merge(context, {abbrevs});
 
         let a = abbrevs[book];
-        merge(context, {a});
-        assert(() => isDefined(a));
+        u.merge(context, {a});
+        u.assert(() => u.isDefined(a));
 
         abbrev = a.abbrev;
-        merge(context, {abbrev});
-        assert(() => isString(abbrev));
+        u.merge(context, {abbrev});
+        u.assert(() => u.isString(abbrev));
     });
     return abbrev;
 }
 
 function getVerseRange(book, chapter) {
-    return logIndent(getVerseRange.name, context=> {
-        merge(context, {chapter});
-        assert(() => isInteger(chapter));
+    return u.scope(getVerseRange.name, context=> {
+        u.merge(context, {chapter});
+        u.assert(() => u.isInteger(chapter));
 
         let abbrev = getAbbrev(book);
 
-        merge(context, {verseCounts});
+        u.merge(context, {verseCounts});
         let counts = verseCounts[abbrev];
-        merge(context, {counts});
+        u.merge(context, {counts});
 
         let before = 0;
         let count;
         let found = false;
-        loop(counts.chapters, (c, index) => {
+        u.loop(counts.chapters, (c, index) => {
             if (index === chapter) {
                 found = true;
                 count = c;
@@ -133,36 +108,36 @@ function getVerseRange(book, chapter) {
             before += c;
         });
 
-        merge(context, {found});
-        assert(found);
+        u.merge(context, {found});
+        u.assert(found);
 
         return { before, count };
     });
 }
 
 function getVerses(book, chapter) {
-    return logIndent(getVerses.name, context=> {
-        merge(context, {book});
-        merge(context, {chapter});
+    return u.scope(getVerses.name, context=> {
+        u.merge(context, {book});
+        u.merge(context, {chapter});
         
-        assert(() => isDefined(interlinears[book]));
-        assert(() => isArray(interlinears[book]));
+        u.assert(() => u.isDefined(interlinears[book]));
+        u.assert(() => u.isArray(interlinears[book]));
 
         let bookLength = interlinears[book].length;
-        merge(context, {bookLength});
+        u.merge(context, {bookLength});
 
         const {before, count} = getVerseRange(book, chapter);
 
-        isArray(interlinears[book]);
+        u.isArray(interlinears[book]);
         
-        merge(context, {before});
-        merge(context, {count});
+        u.merge(context, {before});
+        u.merge(context, {count});
 
-        let r = range(count, before);
-        merge(context, {r});
+        let r = u.range(count, before);
+        u.merge(context, {r});
 
         let verses = r.map(i => interlinears[book][i]);
-        merge(context, {verses});
+        u.merge(context, {verses});
 
         return verses;
     });

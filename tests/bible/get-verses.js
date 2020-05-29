@@ -2,24 +2,16 @@ const {
     getVerses,
 } = require('../../bible');
 
-const {
-    assert,
-    assertIsEqual,
-} = require('../../utilities/assert')
+const u = require('wlj-utilities');
 
-const {
-    logIndent,
-    merge,
-} = require('../../utilities/log')
-
-logIndent(__filename, context => {
+u.scope(__filename, context => {
     let verses;
     
     verses = getVerses('John', 0);
-    merge(context, {verses});
-    assertIsEqual(verses.length, 51);
+    u.merge(context, {verses});
+    u.assertIsEqual(verses.length, 51);
     
     verses = getVerses('John', 1);
-    merge(context, {verses});
-    assertIsEqual(verses.length, 25);
+    u.merge(context, {verses});
+    u.assertIsEqual(verses.length, 25);
 })
