@@ -4,7 +4,10 @@ const {
     getBooks,
     getChapterCount,
     getVerses,
+    getWords,
 } = require('/bible');
+
+const words = getWords();
 
 const ctrl = 'HomeController';
 angular.module('bible', []);
@@ -108,6 +111,18 @@ angular.module('bible').controller(ctrl, function ($scope) {
                 'font-size': (square * .02 + $scope.state.fontSizeFactor * .2 + 1) + 'em',
             };
             return style;
+        };
+        $scope.translateAll = function () {
+            u.loop(words, w => {
+                $scope.state.toggledWords[w] = true;
+            });
+            saveState();
+        };
+        $scope.unTranslateAll = function () {
+            u.loop(words, w => {
+                $scope.state.toggledWords[w] = false;
+            });
+            saveState();
         };
     });
 });
