@@ -25,5 +25,5 @@ u.scope(__filename, context => {
 
     let json = JSON.stringify(bible, ' ', 2);
 
-    fs.writeFileSync('./data/bibles/abbrevs.json', json);
+    fs.writeFileSync('./generated/abbrevs.json', json);
 });

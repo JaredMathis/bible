@@ -16,5 +16,5 @@ u.scope(__filename, context => {
 
     let json = JSON.stringify(bible, ' ', 2);
 
-    fs.writeFileSync('./data/bibles/verse-counts.json', json);
+    fs.writeFileSync('./generated/verse-counts.json', json);
 });

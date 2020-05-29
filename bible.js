@@ -22,12 +22,12 @@ let abbrevs;
 u.scope(__filename, context=> {
     interlinears = require('./generated/interlinears');
 
-    let vc = require('./data/bibles/verse-counts');
+    let vc = require('./generated/verse-counts');
     verseCounts = u.toDictionary(vc, 'abbrev');
 
     books = vc.map(v => v.name);
 
-    let a = require('./data/bibles/abbrevs');
+    let a = require('./generated/abbrevs');
     abbrevs = u.toDictionary(a, 'name');
 });
 

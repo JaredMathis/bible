@@ -1,5 +1,5 @@
 
-const abbrevs = require('./../data/bibles/abbrevs');
+const abbrevs = require('./../generated/abbrevs');
 
 const fs = require('fs');
 const u = require('wlj-utilities');
