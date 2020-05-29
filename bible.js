@@ -1,11 +1,12 @@
 const u = require('wlj-utilities');
 
 module.exports = {
-    getBooks,
     getVerses,
     getVerseRange,
     getChapterCount,
 };
+
+u.merge(module.exports, require('./index'));
 
 function is1Kings22Quirk(book, chapter) {
     let isQuirk = book === "i_kings" && chapter === 22;
@@ -30,15 +31,6 @@ u.scope(__filename, context=> {
     let a = require('./generated/abbrevs');
     abbrevs = u.toDictionary(a, 'name');
 });
-
-function getBooks() {
-    return u.scope(getBooks.name, context=> {
-        u.merge(context, {books});
-        u.assert(() => books[0] === 'Genesis');
-
-        return books;
-    });
-}
 
 function getChapterCount(book) {
     return u.scope(getChapterCount.name, context=> {
