@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "ncp": "^2.0.0",
-    "wlj-utilities": "^1.0.49"
+    "wlj-utilities": "^1.0.82"
   },
   "devDependencies": {},
   "scripts": {
