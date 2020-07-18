@@ -15,5 +15,5 @@ u.scope(__filename, context => {
     `;
 
     u.merge(context, {command});
-    execSync(command);
+    u.executeCommand(command);
 })
